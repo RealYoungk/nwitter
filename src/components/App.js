@@ -8,24 +8,24 @@ function App() {
   // const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userObj, setUserObj] = useState(null);
   useEffect(() => {
-    async function initUser() {
-      await authService.onAuthStateChanged(async (user) => {
-        // console.log(user);
-        if (user) {
-          // setIsLoggedIn(true);
-          await setUserObj({
-            displayName: user.displayName,
-            uid: user.uid,
-            updateProfile: (args) => user.updateProfile(args),
-          });
-        } else {
-          // setIsLoggedIn(false);
-          setUserObj(null);
-        }
-        setInit(true);
-      });
-    }
-    initUser();
+    // async function initUser() {
+    authService.onAuthStateChanged(async (user) => {
+      // console.log(user);
+      if (user) {
+        // setIsLoggedIn(true);
+        await setUserObj({
+          displayName: user.displayName,
+          uid: user.uid,
+          updateProfile: (args) => user.updateProfile(args),
+        });
+      } else {
+        // setIsLoggedIn(false);
+        setUserObj(null);
+      }
+      setInit(true);
+    });
+    // }
+    // initUser();
   }, []);
   const refreshUser = () => {
     const user = authService.currentUser;
